@@ -7,6 +7,7 @@ To run/test the experiment locally (in test mode):
 
 1. navigate to root project folder
 2. start python http server: `python3 -m http.server`
-3. go to [](localhost:8000/indexTEST.html) in web browser
+3. go to http://localhost:8000/indexTEST.html in web browser
 
-
+# Note
+Music used in experiment is not included here.
