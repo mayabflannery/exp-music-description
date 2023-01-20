@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>DML Experiment: Describe</title>
+    <meta charset="UTF-8"><!-- jsPsych: V7.1; custom style -->
+
+    <script type="text/javascript" src="jspsych/dist/jspsych.js"></script>
+    <link href="resources/dml.css" rel="stylesheet" type="text/css"><!-- Plugins specific to the experiment -->
+    <link rel="stylesheet" href="https://unpkg.com/@jspsych/plugin-survey@0.2.0/css/survey.css">
+
+    <script type="text/javascript" src="jspsych/dist/plugin-html-keyboard-response.js"></script>
+    <script type="text/javascript" src="jspsych/dist/plugin-audio-slider-response.js"></script>
+    <script type="text/javascript" src="jspsych/dist/plugin-audio-button-response.js"></script>
+    <script type="text/javascript" src="jspsych/dist/plugin-external-html.js"></script>
+    <script type="text/javascript" src="jspsych/dist/plugin-instructions.js"></script>
+    <script type="text/javascript" src="jspsych/dist/plugin-survey.js"></script>
+    <script type="text/javascript" src="jspsych/dist/plugin-survey-likert.js"></script>
+    <script type="text/javascript" src="jspsych/dist/plugin-preload.js"></script>
+    <!-- The Pavlovia part; external 'plugin-pavlovia.js' for V7.1 compatibility -->
+
+    <script type="text/javascript" src="lib/vendors/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="resources/plugin-pavlovia.js"></script>
+</head>
+
+<body>
+    <script type='text/javascript'>
+        /* Initialize the experiment */
+        var jsPsych = initJsPsych({
+            show_progress_bar: true,
+            auto_update_progress_bar: false,
+            // message_progress_bar: 'Completion',
+            /* TODO: Comment on_finish after testing */
+            on_finish: function (data) {
+                /* Uncomment if we want to see data at end of experiment */
+                jsPsych.data.displayData();
+            }
+        });
+        /* Create empty timeline; experiment runs in this order timeline.push(...) to add events*/
+        var timeline = [];
+        var all_trials = 0;
+        var overall_trial = 0;
+        /* Define welcome message trial testing in wd: python3 -m http.server [localhost:8000]  */
+        var welcome = {
+            type: jsPsychExternalHtml,
+            url: "resources/text/welcome.html",
+            cont_btn: "start",
+            check_fn: function () {
+                return true;
+            },
+            force_refresh: true,
+            on_finish: function () {
+                overall_trial++;
+                jsPsych.setProgressBar(overall_trial / all_trials);
+            }
+        };
+        all_trials++;
+        //---    timeline.push(welcome);
+
+        var consent = {
+            type: jsPsychExternalHtml,
+            url: "resources/text/consent.html",
+            cont_btn: "submit",
+            check_fn: function (elem) {
+                if (document.getElementById('consent').checked) {
+                    return true;
+                } else {
+                    alert(
+                        "You did not agree to the consent. If you would like\
+                         more information about the study, please contact one\
+                         of the administrators.");
+                    return false;
+                }
+            },
+            force_refresh: true,
+            data: {
+                consent: "complete",
+            },
+            on_finish: function () {
+                overall_trial++;
+                jsPsych.setProgressBar(overall_trial / all_trials);
+            }
+        };
+        all_trials++;
+    //---    timeline.push(consent);
+    </script>
+
+    <!------ Include demographic survey --->
+    <script type="text/javascript" src="resources/demo-instructions.js"></script>
+    <script type="text/javascript" src="resources/demographic.js"></script> --->
+    <!------ Include personality test
+    <script type="text/javascript" src=
+    "resources/personality-instructions.js"></script>
+
+    <script type="text/javascript" src=
+    "resources/personality-trials.js"></script>
+
+    <!------ Include post script -->
+    <script type="text/javascript" src="resources/post-instructions.js"></script>
+    <script type='text/javascript' src="resources/post.js"></script>
+
+    <!------ Include trial script -->
+    <script type="text/javascript" src="resources/trial-instructions.js"></script>
+    <script type='text/javascript' src="resources/trials.js"></script>
+    <!--- Add debrief, run experiment -->
+
+    <script type='text/javascript'>
+        var debrief = {
+            type: jsPsychExternalHtml,
+            url: "resources/text/debrief.html",
+            cont_btn: "done",
+            check_fn: function () {
+                return true;
+            },
+            force_refresh: true,
+            on_finish: function () {
+                overall_trial++;
+                jsPsych.setProgressBar(overall_trial / all_trials);
+            }
+        };
+        all_trials++;
+        timeline.push(debrief);
+
+        /* Run the experiment (everything in timeline) */
+        jsPsych.run(timeline);
+    </script>
+</body>
+
+</html>

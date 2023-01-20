@@ -1,0 +1,21 @@
+name,prompt,type,placeholder,options,required
+age,What is your age?,numeric,,,TRUE
+hand,What is your handedness?,multi-choice,,"[""Left"", ""Right"", ""n/a""]",TRUE
+colour,Do you have colour blindness?,multi-choice,,"[""Yes"", ""No"", ""n/a""]",TRUE
+gender,What is your gender?,multi-choice,,"[""Male"", ""Female"", ""Transgender"", ""Non-binary"", ""n/a""]",TRUE
+dance_train,"Have you ever had any formal dance training?
+If no, enter 0.
+If yes, enter how many years of training.",numeric,,,TRUE
+dance_freq,Approximately how often do you dance? Once a:,multi-choice,,"[""Never"", ""Monthly"", ""Weekly"", ""Daily"", ""n/a""]",TRUE
+dance_style,What style(s) do you dance?,text,"ex. Latin, Ballet, etc.",,FALSE
+music_train,"Have you ever had any formal music training?
+If no, enter 0.
+If yes, enter how many years of training.",numeric,,,TRUE
+music_instr,Do you play a musical instrument and/or sing?,multi-choice,,"[""Yes"", ""No""]",TRUE
+music_type,What is your principle instrument?,text,ex. Piano,,FALSE
+music_age,At what age did you start playing?,numeric,,,FALSE
+music_freq,"Including time spent rehearsing, approximately 
+how many hours a week do you play/sing?",numeric,,,TRUE
+music_play,What type of music do you usually play? ,text,"ex. Classical, Pop, etc.",,FALSE
+music_listen,How many hours per week do you listen to music?,numeric,,,TRUE
+music_genre,What types of music do you listen to?,text,"ex. Classical, Pop, etc.",,FALSE
